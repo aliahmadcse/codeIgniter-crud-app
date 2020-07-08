@@ -3,10 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\NewsModel;
-use CodeIgniter\Controller;
-use CodeIgniter\Model;
 
-class News extends Controller
+class News extends BaseController
 {
     public function index()
     {
@@ -17,6 +15,27 @@ class News extends Controller
         ];
 
         return view('news/overview', $data);
+    }
+
+    public function create()
+    {
+        $model = new NewsModel();
+
+        if (!$this->validate([
+            'title' => 'required|min_length[3]|max_length[255]',
+            'body'  => 'required'
+        ])) {
+
+            return view('news/create');
+        } else {
+            $model->save([
+                'title' => $this->request->getVar('title'),
+                'slug'  => url_title($this->request->getVar('title'), '-', TRUE),
+                'body'  => $this->request->getVar('body'),
+            ]);
+
+            return redirect()->to('/');
+        }
     }
 
     public function view($slug = null)
@@ -31,6 +50,6 @@ class News extends Controller
 
         $data['title'] = $data['news']['title'];
 
-        echo view('news/view', $data);
+        return view('news/view', $data);
     }
 }
