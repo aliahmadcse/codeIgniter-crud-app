@@ -2,8 +2,22 @@
 
 <?php $this->section('content'); ?>
 
-<h2><?= esc($news['title']); ?></h2>
+<dl class="mb-5">
+    <dt>
+        Title
+    </dt>
+    <dd>
+        <?= esc($news['title']); ?>
+    </dd>
+    <dt>
+        Slug:
+    </dt>
+    <dd><?= esc($news['slug']) ?></dd>
+    <dt>
+        Body:
+    </dt>
+    <dd><?= esc($news['body']) ?></dd>
 
-<?= esc($news['body']); ?>
+</dl>
 
 <?php $this->endSection(); ?>

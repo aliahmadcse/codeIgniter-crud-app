@@ -13,7 +13,7 @@ class NewsModel extends Model
     public function getNews($slug = false)
     {
         if ($slug === false) {
-            return $this->findAll();
+            return $this->orderBy('id', 'DESC')->findAll();
         }
 
         return $this->asArray()

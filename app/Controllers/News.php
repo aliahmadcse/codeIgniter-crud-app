@@ -52,4 +52,38 @@ class News extends BaseController
 
         return view('news/view', $data);
     }
+
+    public function newsById($id = 0)
+    {
+        $model = new NewsModel();
+        $data['news'] = $model->asArray()
+            ->where(['id' => $id])
+            ->first();
+        return view('news/edit', $data);
+    }
+
+    public function update($id = 0)
+    {
+        $model = new NewsModel();
+        $data = [
+            'title' => $this->request->getVar('title'),
+            'slug'  => url_title($this->request->getVar('title'), '-', TRUE),
+            'body'  => $this->request->getVar('body'),
+        ];
+        $query = "UPDATE news SET title='" . $data['title'] . "',";
+        $query .= "slug='" . $data['slug'] . "',";
+        $query .= "body='" . $data['body'] . "' ";
+        $query .= "WHERE id=" . $id;
+
+        $model->query($query);
+
+        return redirect()->to('/');
+    }
+
+    public function delete($id = 0)
+    {
+        $model = new NewsModel();
+        $model->delete(['id' => $id]);
+        return redirect()->to('/');
+    }
 }

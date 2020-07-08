@@ -35,6 +35,12 @@ $routes->get('/', 'News::index');
 
 $routes->match(['get', 'post'], 'news/create', 'News::create');
 
+$routes->get('news/edit/(:any)', 'News::newsById/$1');
+
+$routes->post('news/edit/save/(:any)', 'News::update/$1');
+
+$routes->get('news/delete/(:any)', 'News::delete/$1');
+
 $routes->get('news/(:segment)', 'News::view/$1');
 
 

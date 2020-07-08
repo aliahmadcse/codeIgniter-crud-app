@@ -22,8 +22,9 @@
                     <td><?= esc($news_item['slug']) ?></td>
                     <td><?= esc($news_item['body']) ?></td>
                     <td><a href="/news/<?= esc($news_item['slug'], 'url') ?>">View</a></td>
-                    <td><a href="">Edit</a></td>
-                    <td><a href="" class="text-danger">Delete</a></td>
+                    <td><a href="/news/edit/<?= esc($news_item['id']) ?>">Edit</a></td>
+
+                    <td><a href="/news/delete/<?= esc($news_item['id']) ?>" class="text-danger" onclick="return confirm('Are you sure, you want to delete this record?')">Delete</a></td>
                 </tr>
             <?php endforeach; ?>
 
