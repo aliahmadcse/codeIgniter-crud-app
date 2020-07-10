@@ -73,7 +73,8 @@ class News extends BaseController
         $query = "UPDATE news SET title='" . $data['title'] . "',";
         $query .= "slug='" . $data['slug'] . "',";
         $query .= "body='" . $data['body'] . "' ";
-        $query .= "WHERE id=" . $id;
+        $query .= "WHERE id=" . $id . ";";
+        echo $query;
 
         $model->query($query);
 
